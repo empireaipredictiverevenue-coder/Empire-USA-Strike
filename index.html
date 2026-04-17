@@ -16,7 +16,7 @@
 <body class="antialiased flex flex-col min-h-screen">
 
     <header class="p-6 border-b border-[#30363d] flex justify-between items-center">
-        <div class="text-[#00f2ff] text-2xl font-bold tracking-widest">EMPIRE AI <span class="text-sm text-gray-500">v135.0</span></div>
+        <div class="text-[#00f2ff] text-2xl font-bold tracking-widest">EMPIRE AI <span class="text-sm text-gray-500">v148.0</span></div>
         <div class="text-red-500 animate-pulse font-bold text-sm border border-red-500 px-3 py-1 rounded">LIVE STRIKE ZONE: {{ ZONE_NAME }}</div>
     </header>
 
@@ -85,10 +85,17 @@
             pingAgent005("LEAD_CAPTURED", { sqft: sqft, headline_used: selectedHeadline });
         });
 
-        // Track Solana Pay clicks
+        // Track Solana Pay clicks and wire the cash
         document.getElementById('solana-pay').addEventListener('click', function() {
-            pingAgent005("SOLANA_CHECKOUT_INITIATED", { amount: document.getElementById('calc-price').innerText });
-            alert("Connecting to Token Pocket..."); 
+            const finalAmount = document.getElementById('calc-price').innerText;
+            pingAgent005("SOLANA_CHECKOUT_INITIATED", { amount: finalAmount });
+            
+            // The Live Bank Wire
+            const wallet = "FTg2aAtrZ2QePFiQHExzTJESZnwMT82Jr6aETm6ni57q";
+            const memo = "Empire_AI_Material_Block";
+            
+            // This instantly opens Token Pocket or Phantom on their phone
+            window.location.href = "solana:" + wallet + "?amount=" + finalAmount + "&message=" + memo;
         });
 
         // The web-hook that makes the business smarter
