@@ -1,0 +1,25 @@
+name: Empire Radar Engine
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' 
+  workflow_dispatch: 
+
+jobs:
+  run-radar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open the Vault
+        uses: actions/checkout@v3
+        
+      - name: Power Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Load the Gear
+        run: pip install requests beautifulsoup4
+          
+      - name: Fire the Striker Agent
+        timeout-minutes: 2
+        run: python striker_agent.py
