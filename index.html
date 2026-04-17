@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empire AI | Live Strike Zone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        body { font-family: 'Share Tech Mono', monospace; background-color: #0d1117; color: #ffffff; }
+        .cyan-glow { text-shadow: 0 0 10px #00f2ff; }
+        .green-button { background-color: #39ff14; color: #000; transition: all 0.3s ease; }
+        .green-button:hover { box-shadow: 0 0 15px #39ff14; transform: scale(1.05); }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <header class="p-6 border-b border-[#30363d] flex justify-between items-center">
+        <div class="text-[#00f2ff] text-2xl font-bold tracking-widest">EMPIRE AI <span class="text-sm text-gray-500">v135.0</span></div>
+        <div class="text-red-500 animate-pulse font-bold text-sm border border-red-500 px-3 py-1 rounded">LIVE STRIKE ZONE: {{ ZONE_NAME }}</div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-6 text-center mt-10">
+        <h1 class="text-5xl md:text-7xl font-bold text-[#00f2ff] mb-6 cyan-glow uppercase">
+            SEE THE MONEY BEFORE IT HITS.
+        </h1>
+        <p id="ab-headline" class="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl">
+            Empire AI turns your data into a crystal ball. Automate every touchpoint. Predict every dollar. Own your market.
+        </p>
+
+        <div class="bg-[#161b22] border border-[#00f2ff] p-8 rounded-lg shadow-2xl max-w-xl w-full">
+            <h2 class="text-2xl text-white mb-4">Storm-Impact Calculator</h2>
+            <p class="text-gray-400 text-sm mb-6">Get a 99% accurate repair estimate instantly. No 6-month bank statements required.</p>
+            
+            <form id="lead-magnet-form" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-[#00f2ff] text-sm mb-1">Square Footage</label>
+                    <input type="number" id="sqft" class="w-full bg-[#0d1117] border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-[#39ff14]" placeholder="e.g. 50000" required>
+                </div>
+                <div>
+                    <label class="block text-[#00f2ff] text-sm mb-1">Damage Type</label>
+                    <select id="damage" class="w-full bg-[#0d1117] border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-[#39ff14]">
+                        <option value="roof">Industrial Roofing (Tornado/Hail)</option>
+                        <option value="water">Water Mitigation (Flood)</option>
+                        <option value="structural">Structural Integrity</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full green-button font-bold text-lg p-4 rounded uppercase tracking-wide mt-4">
+                    Calculate & Lock Material Rate
+                </button>
+            </form>
+            
+            <div id="result-box" class="hidden mt-6 p-4 border border-[#39ff14] bg-[#0d1117]">
+                <h3 class="text-[#39ff14] text-xl font-bold mb-2">ESTIMATE: $<span id="calc-price"></span></h3>
+                <p class="text-sm text-gray-400 mb-4">Materials located 14 miles away. Secure your contractor block now via Solana.</p>
+                <button id="solana-pay" class="w-full border border-[#00f2ff] text-[#00f2ff] hover:bg-[#00f2ff] hover:text-black transition-all p-3 rounded font-bold">
+                    Pay With Token Pocket
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 1. The Learning Loop: A/B Testing
+        const headlines = [
+            "Empire AI turns your data into a crystal ball. Automate every touchpoint.", 
+            "Get instant material rates before your competitors even wake up.",
+            "Your roof is damaged. Our AI already found the cheapest materials."
+        ];
+        // Pick a random headline to test what converts best
+        const selectedHeadline = headlines[Math.floor(Math.random() * headlines.length)];
+        document.getElementById('ab-headline').innerText = selectedHeadline;
+
+        // 2. The Calculator Logic (Micro Lead Magnet)
+        document.getElementById('lead-magnet-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const sqft = document.getElementById('sqft').value;
+            const estimate = (sqft * 4.50).toFixed(2); // Mock logic for speed
+            
+            document.getElementById('calc-price').innerText = estimate;
+            document.getElementById('lead-magnet-form').classList.add('hidden');
+            document.getElementById('result-box').classList.remove('hidden');
+
+            // 3. Send data back to Agent 005 to LEARN
+            pingAgent005("LEAD_CAPTURED", { sqft: sqft, headline_used: selectedHeadline });
+        });
+
+        // Track Solana Pay clicks
+        document.getElementById('solana-pay').addEventListener('click', function() {
+            pingAgent005("SOLANA_CHECKOUT_INITIATED", { amount: document.getElementById('calc-price').innerText });
+            alert("Connecting to Token Pocket..."); 
+        });
+
+        // The web-hook that makes the business smarter
+        function pingAgent005(action, data) {
+            console.log(`[AGENT 005 LOG] Action: ${action}`, data);
+            // In live mode, this sends an invisible ping to your server:
+            // fetch('https://api.empire-ai.com/agent-005/learn', { method: 'POST', body: JSON.stringify({action, data}) });
+        }
+    </script>
+</body>
+</html>
