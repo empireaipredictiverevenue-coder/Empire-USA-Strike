@@ -11,41 +11,76 @@
         .cyan-glow { text-shadow: 0 0 10px #00f2ff; }
         .green-button { background-color: #39ff14; color: #000; transition: all 0.3s ease; }
         .green-button:hover { box-shadow: 0 0 15px #39ff14; transform: scale(1.05); }
+        .border-cyan { border: 1px solid #00f2ff; }
+        .script-box { background-color: #000; border-left: 4px solid #39ff14; padding: 15px; margin-bottom: 15px; }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
 
     <header class="p-6 border-b border-[#30363d] flex justify-between items-center">
-        <div class="text-[#00f2ff] text-2xl font-bold tracking-widest">EMPIRE PARTNERS <span class="text-sm text-gray-500">v152.0</span></div>
-        <div class="text-[#39ff14] font-bold text-sm border border-[#39ff14] px-3 py-1 rounded">STATUS: RECRUITING</div>
+        <div class="text-[#00f2ff] text-2xl font-bold tracking-widest uppercase">Empire Partners <span class="text-sm text-gray-500">v169.0</span></div>
+        <div class="text-[#39ff14] font-bold text-sm border border-[#39ff14] px-3 py-1 rounded">PLATINUM EXCELLENCE ACTIVE</div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center justify-center p-6 text-center mt-10">
+    <main class="flex-grow flex flex-col items-center justify-center p-6 text-center mt-10 mb-20">
         <h1 class="text-5xl md:text-7xl font-bold text-[#00f2ff] mb-6 cyan-glow uppercase">
-            WE FIND THE STORM. YOU SHARE THE LINK. WE SPLIT THE CASH.
+            WE TRACK THE STORM. YOU GET THE CASH.
         </h1>
         <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-4xl">
-            Stop knocking on doors. Our AI radar tracks USA storm damage in real time and builds the checkout page in 80 seconds. Get a 50% instant Solana payout for every warehouse lead that books through your link.
+            Empire AI uses satellite radar to find USA storm damage in real-time. We forge the checkout pages in 80 seconds. Join the elite fleet and get an instant 50% Solana split for every warehouse lead captured.
         </p>
 
-        <div class="bg-[#161b22] border border-[#00f2ff] p-8 rounded-lg shadow-2xl max-w-xl w-full">
-            <h2 class="text-2xl text-white mb-4">Claim Your Territory</h2>
-            <p class="text-gray-400 text-sm mb-6">Enter your Token Pocket wallet address. We will generate your custom tracking link instantly.</p>
+        <div class="bg-[#161b22] border-cyan p-8 rounded-lg shadow-2xl max-w-3xl w-full">
+            <div id="signup-section">
+                <h2 class="text-2xl text-white mb-4 uppercase font-bold">Deploy Your Link</h2>
+                <p class="text-gray-400 text-sm mb-6">Enter your Token Pocket wallet address to generate your unique tracking ID and unlock the Apex Playbook.</p>
+                
+                <form id="partner-form" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-[#00f2ff] text-sm mb-1 uppercase">Solana Wallet (Receiving)</label>
+                        <input type="text" id="wallet" class="w-full bg-[#0d1117] border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-[#39ff14]" placeholder="Enter Wallet..." required>
+                    </div>
+                    <button type="submit" class="w-full green-button font-bold text-lg p-4 rounded uppercase tracking-wide mt-4">
+                        Generate Strike Link & Unlock Playbook
+                    </button>
+                </form>
+            </div>
             
-            <form id="partner-form" class="space-y-4 text-left">
-                <div>
-                    <label class="block text-[#00f2ff] text-sm mb-1">Your Solana Wallet Address</label>
-                    <input type="text" id="wallet" class="w-full bg-[#0d1117] border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-[#39ff14]" placeholder="e.g. FTg2aAtrZ2Qe..." required>
+            <div id="link-box" class="hidden mt-6 text-left">
+                <div class="p-4 border border-[#39ff14] bg-[#0d1117] mb-8">
+                    <h3 class="text-[#39ff14] text-xl font-bold mb-2 uppercase">Your Asset is Live:</h3>
+                    <input type="text" id="custom-link" class="w-full bg-black text-[#00f2ff] p-3 rounded mb-2 text-sm font-bold border border-[#00f2ff]" readonly>
+                    <p class="text-sm text-gray-400">Share this link. Our AI does the closing. You do the collecting.</p>
                 </div>
-                <button type="submit" class="w-full green-button font-bold text-lg p-4 rounded uppercase tracking-wide mt-4">
-                    Generate My Partner Link
-                </button>
-            </form>
-            
-            <div id="link-box" class="hidden mt-6 p-4 border border-[#39ff14] bg-[#0d1117]">
-                <h3 class="text-[#39ff14] text-xl font-bold mb-2">YOUR UNIQUE LINK IS LIVE:</h3>
-                <input type="text" id="custom-link" class="w-full bg-black text-[#00f2ff] p-2 rounded mb-4 text-sm" readonly>
-                <p class="text-sm text-gray-400">Post this on social media or send it to local contractors. We handle the rest.</p>
+
+                <h3 class="text-2xl text-white mb-4 uppercase font-bold border-b border-[#30363d] pb-2">The Apex Playbook</h3>
+                <p class="text-gray-400 text-sm mb-6">Copy and paste these exact scripts. Just swap your link in.</p>
+
+                <div class="script-box">
+                    <h4 class="text-[#00f2ff] font-bold mb-2 uppercase text-sm">1. The Cold Email (Warehouse Owners)</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Hey [Name],<br><br>
+                        We tracked the storm that hit your sector last night. Our satellite radar shows your warehouse at [Address] is right in the red zone for roof damage.<br><br>
+                        I ran the math through our automated forge. You can see the exact square footage damage and cost breakdown right here: <strong>[YOUR LINK HERE]</strong><br><br>
+                        Let me know if you need a crew out there before it leaks.<br><br>
+                        Best,<br>[Your Name]
+                    </p>
+                </div>
+
+                <div class="script-box">
+                    <h4 class="text-[#00f2ff] font-bold mb-2 uppercase text-sm">2. The LinkedIn DM (B2B Networking)</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Hey [Name]. I work with a predictive revenue team that tracks industrial storm damage. Our radar flagged your building yesterday. I built a custom damage report for your property here: <strong>[YOUR LINK HERE]</strong>. Check the math and let me know if you need help fixing it.
+                    </p>
+                </div>
+
+                <div class="script-box">
+                    <h4 class="text-[#00f2ff] font-bold mb-2 uppercase text-sm">3. The Objection Handler ("Is this real?")</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        100% real. We use the same satellite weather data the insurance companies use, but we give it to you first. Click the link, put in your square footage, and the Apex Engine does the math. If the numbers make sense, you book the repair right on the page.
+                    </p>
+                </div>
+
             </div>
         </div>
     </main>
@@ -55,12 +90,14 @@
             e.preventDefault();
             const wallet = document.getElementById('wallet').value;
             
-            // Build the custom tracking link
-            const baseURL = window.location.href.replace('partner.html', 'index.html');
-            const finalLink = baseURL + "?ref=" + wallet.substring(0, 8);
+            const currentPath = window.location.pathname;
+            const newPath = currentPath.replace('partner.html', 'index.html');
+            const baseURL = window.location.origin + newPath;
+            
+            const finalLink = baseURL + "?ref=" + wallet;
             
             document.getElementById('custom-link').value = finalLink;
-            document.getElementById('partner-form').classList.add('hidden');
+            document.getElementById('signup-section').classList.add('hidden');
             document.getElementById('link-box').classList.remove('hidden');
         });
     </script>
