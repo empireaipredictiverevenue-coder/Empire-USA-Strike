@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empire AI | Partner Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        body { font-family: 'Share Tech Mono', monospace; background-color: #0d1117; color: #ffffff; }
+        .cyan-glow { text-shadow: 0 0 10px #00f2ff; }
+        .green-button { background-color: #39ff14; color: #000; transition: all 0.3s ease; }
+        .green-button:hover { box-shadow: 0 0 15px #39ff14; transform: scale(1.05); }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <header class="p-6 border-b border-[#30363d] flex justify-between items-center">
+        <div class="text-[#00f2ff] text-2xl font-bold tracking-widest">EMPIRE PARTNERS <span class="text-sm text-gray-500">v152.0</span></div>
+        <div class="text-[#39ff14] font-bold text-sm border border-[#39ff14] px-3 py-1 rounded">STATUS: RECRUITING</div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-6 text-center mt-10">
+        <h1 class="text-5xl md:text-7xl font-bold text-[#00f2ff] mb-6 cyan-glow uppercase">
+            WE FIND THE STORM. YOU SHARE THE LINK. WE SPLIT THE CASH.
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-4xl">
+            Stop knocking on doors. Our AI radar tracks USA storm damage in real time and builds the checkout page in 80 seconds. Get a 50% instant Solana payout for every warehouse lead that books through your link.
+        </p>
+
+        <div class="bg-[#161b22] border border-[#00f2ff] p-8 rounded-lg shadow-2xl max-w-xl w-full">
+            <h2 class="text-2xl text-white mb-4">Claim Your Territory</h2>
+            <p class="text-gray-400 text-sm mb-6">Enter your Token Pocket wallet address. We will generate your custom tracking link instantly.</p>
+            
+            <form id="partner-form" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-[#00f2ff] text-sm mb-1">Your Solana Wallet Address</label>
+                    <input type="text" id="wallet" class="w-full bg-[#0d1117] border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-[#39ff14]" placeholder="e.g. FTg2aAtrZ2Qe..." required>
+                </div>
+                <button type="submit" class="w-full green-button font-bold text-lg p-4 rounded uppercase tracking-wide mt-4">
+                    Generate My Partner Link
+                </button>
+            </form>
+            
+            <div id="link-box" class="hidden mt-6 p-4 border border-[#39ff14] bg-[#0d1117]">
+                <h3 class="text-[#39ff14] text-xl font-bold mb-2">YOUR UNIQUE LINK IS LIVE:</h3>
+                <input type="text" id="custom-link" class="w-full bg-black text-[#00f2ff] p-2 rounded mb-4 text-sm" readonly>
+                <p class="text-sm text-gray-400">Post this on social media or send it to local contractors. We handle the rest.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('partner-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const wallet = document.getElementById('wallet').value;
+            
+            // Build the custom tracking link
+            const baseURL = window.location.href.replace('partner.html', 'index.html');
+            const finalLink = baseURL + "?ref=" + wallet.substring(0, 8);
+            
+            document.getElementById('custom-link').value = finalLink;
+            document.getElementById('partner-form').classList.add('hidden');
+            document.getElementById('link-box').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
